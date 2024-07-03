@@ -1,4 +1,4 @@
-name:  OpenWrt-基础版
+name:  OpenWrt-R2S
 
 on: 
   workflow_dispatch:
@@ -9,9 +9,9 @@ env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
   FEEDS_CONF: feeds.conf.default
-  CONFIG_FILE: OK1.config
-  DIY_P1_SH: DIY-1.sh
-  DIY_P2_SH: DIY-2.sh
+  CONFIG_FILE: config/R2S.config
+  DIY_P1_SH: diy/DIY-1-R2S.sh
+  DIY_P2_SH: diy/DIY-2-R2S.sh
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
