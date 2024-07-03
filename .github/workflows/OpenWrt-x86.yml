@@ -149,10 +149,9 @@ jobs:
       run: |
         echo "release_tag=${{ env.TAG_TIME }}" >> $GITHUB_OUTPUT
         touch release.txt
-        echo "OpenWrt-Mini_ X86_64-合集版（支持ipv6）" >> release.txt
-        echo "默认地址：192.168.2.100" >> release.txt
-        echo "默认密码：无密码" >> release.txt
-        echo "插件清单：ShadowSocksR Plus+，PassWall，OpenClash" >> release.txt
+        echo "OpenWrt_ X86_64" >> release.txt
+        echo "默认地址：192.168.11.41" >> release.txt
+        echo "默认密码：password" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 发布新版固件
@@ -161,7 +160,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
-        name: ${{ env.FILE_TIME }} -合集版
+        name: ${{ env.FILE_TIME }} 
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/* 
