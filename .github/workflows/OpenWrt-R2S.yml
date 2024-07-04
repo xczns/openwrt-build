@@ -1,4 +1,4 @@
-name:  R2S
+name:  OpenWrt-R2S
 
 on: 
 #  workflow_dispatch:
