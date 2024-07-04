@@ -149,7 +149,7 @@ jobs:
       run: |
         echo "release_tag=${{ env.TAG_TIME }}" >> $GITHUB_OUTPUT
         touch release.txt
-        echo "OpenWrt_ X86_64" >> release.txt
+        echo "OpenWrt_X86_64" >> release.txt
         echo "默认地址：192.168.11.41" >> release.txt
         echo "默认密码：password" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
