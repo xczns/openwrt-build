@@ -1,9 +1,9 @@
 name:  x86
 
 on: 
-workflow_dispatch:
-# schedule:
-#   - cron: 1 0 * * *
+  workflow_dispatch:
+#  schedule:
+#    - cron: 1 0 * * *
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
@@ -15,7 +15,7 @@ env:
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
   TZ: Asia/Shanghai
-
+  
 jobs:
   build:
     runs-on: ubuntu-20.04
@@ -117,11 +117,30 @@ jobs:
       if: (!cancelled())
       run: df -hT
 
+    - name: 打包整理固件
+      id: organize
+      if: env.UPLOAD_FIRMWARE == 'true' && !cancelled()
+      run: |
+        cd openwrt/bin/targets/*/*
+        rm -rf packages && mkdir packages
+        find -name "*esxi-flat.vmdk*" | xargs -i mv -f {} packages
+        find -name "*kernel.bin*" | xargs -i mv -f {} packages
+        find -name "*rootfs*" | xargs -i mv -f {} packages
+        find -name "*.manifest*" | xargs -i mv -f {} packages
+        find -name "*vmlinuz*" | xargs -i mv -f {} packages
+        find -name "*esxi.vmdk*" | xargs -i mv -f {} packages
+        find -name "*buildinfo*" | xargs -i mv -f {} packages
+        find -name "*json*" | xargs -i mv -f {} packages
+        find -name "*sha256sums*" | xargs -i mv -f {} packages
+        rm -rf packages
+        echo "FIRMWARE=$PWD" >> $GITHUB_ENV
+        echo "status=success" >> $GITHUB_OUTPUT
+
     - name: 打包上传固件
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt-Mini${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 发布新版固件
@@ -130,7 +149,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
-        name: ${{ env.FILE_TIME }} -x86
+        name: ${{ env.FILE_TIME }} -合集版
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/* 
