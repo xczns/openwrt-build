@@ -19,5 +19,8 @@
 # echo "src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git;main" >> "feeds.conf.default"
 
 # 6-自用插件源
-echo "src-git small https://github.com/ZYBIN-tech/small.git" >> "feeds.conf.default"
-echo "src-git op https://github.com/ZYBIN-tech/packages.git" >> "feeds.conf.default"
+echo "src-git danshui1 https://github.com/281677160/openwrt-package.git" >> "feeds.conf.default"
+echo "src-git helloworld https://github.com/fw876/helloworld.git" >> "feeds.conf.default"
+echo "src-git passwall1 https://github.com/xiaorouji/openwrt-passwall" >> "feeds.conf.default"
+echo "src-git passwall2 https://github.com/xiaorouji/openwrt-passwall2" >> "feeds.conf.default"
+echo "src-git passwall3 https://github.com/xiaorouji/openwrt-passwall-packages" >> "feeds.conf.default"
