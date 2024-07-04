@@ -1,7 +1,7 @@
-name:  OpenWrt-R2S
+name:  R2S
 
 on: 
-#  workflow_dispatch:
+workflow_dispatch:
 #  schedule:
 #    - cron: 1 0 * * *
 

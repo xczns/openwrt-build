@@ -1,7 +1,7 @@
-name:  OpenWrt-x86
+name:  x86
 
 on: 
-#  workflow_dispatch:
+workflow_dispatch:
 #  schedule:
 #    - cron: 1 0 * * *
 
