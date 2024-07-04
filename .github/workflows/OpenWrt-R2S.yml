@@ -140,19 +140,8 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-Mini${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt-${{ env.DEVICE_NAME }}-${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
-
-    - name: 创建发布标签
-      id: tag
-      if: env.UPLOAD_RELEASE == 'true' && !cancelled()
-      run: |
-        echo "release_tag=${{ env.TAG_TIME }}" >> $GITHUB_OUTPUT
-        touch release.txt
-        echo "OpenWrt_R2S" >> release.txt
-        echo "默认地址：192.168.1.145" >> release.txt
-        echo "默认密码：password" >> release.txt
-        echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 发布新版固件
       uses: softprops/action-gh-release@master
