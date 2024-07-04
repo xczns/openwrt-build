@@ -83,6 +83,9 @@ jobs:
     - name: 安装外部插件
       run: cd openwrt && ./scripts/feeds install -a
 
+    - name: 安装外部插件（检查）
+      run: cd openwrt && ./scripts/feeds install -a
+
     - name: 加载个人设置
       run: |
         [ -e files ] && mv files openwrt/files
