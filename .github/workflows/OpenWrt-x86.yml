@@ -140,7 +140,7 @@ jobs:
       uses: actions/upload-artifact@main
       if: steps.organize.outputs.status == 'success' && !cancelled()
       with:
-        name: OpenWrt-Mini${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
+        name: OpenWrt-x86${{ env.DEVICE_NAME }}${{ env.FILE_DATE }}
         path: ${{ env.FIRMWARE }}
 
     - name: 发布新版固件
@@ -149,7 +149,7 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
       with:
-        name: ${{ env.FILE_TIME }} -合集版
+        name: ${{ env.FILE_TIME }} -x86
         tag_name: ${{ steps.tag.outputs.release_tag }}
         body_path: release.txt
         files: ${{ env.FIRMWARE }}/* 
