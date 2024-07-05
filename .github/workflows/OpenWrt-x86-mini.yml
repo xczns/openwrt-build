@@ -155,7 +155,7 @@ jobs:
         echo "OpenWrt_X86_64_mini" >> release.txt
         echo "默认地址：192.168.11.41" >> release.txt
         echo "默认密码：password" >> release.txt
-        echo "插件清单：passwall，TTYD，在线用户，文件传输" >> release.txt
+        echo "插件清单：passwall，TTYD，磁盘管理，文件传输" >> release.txt
         echo "status=success" >> $GITHUB_OUTPUT
 
     - name: 发布新版固件
