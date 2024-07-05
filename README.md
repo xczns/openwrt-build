@@ -1,21 +1,16 @@
 ## 基础使用
 
-+   在自己搭建编译环境中使用 [Lean's OpenWrt](https://p3terx.com/go/aHR0cHM6Ly9naXRodWIuY29tL2Nvb2xzbm93d29sZi9sZWRl) 源码生成`.config`文件。
-
-> **TIPS:** 方案默认引用 Lean 的源码。
++   在本地编译环境中使用 [Lean's OpenWrt](https://p3terx.com/go/aHR0cHM6Ly9naXRodWIuY29tL2Nvb2xzbm93d29sZi9sZWRl) 源码生成`.config`文件。
 
 +   在 Actions 页面选择`Build OpenWrt`，然后点击`Run Workflow`按钮，即可开始编译。
 
-+   最后经过一两个小时的等待，不出意外你就可以在 Actions 页面看到已经打包好的固件目录压缩包。
-
-
-> **TIPS:** 如需 ipk 文件可以在**进阶使用**章节找到方法。
++   最后经过一两个小时的等待，不出意外就可以在 Actions 页面看到已经打包好的固件目录压缩包。
 
 ## 进阶使用
 
 ### 自定义环境变量与功能
 
-- 打开 workflow 文件（`.github/workflows/build-openwrt.yml`），你会看到有如下一些环境变量，可按照自己的需求对这些变量进行定义。
+- 打开 workflow 文件（`.github/workflows/build-openwrt.yml`），看到有如下一些环境变量，可按照需求对这些变量进行定义。
 
 
 ```auto
@@ -53,10 +48,7 @@ env:
 
 ### DIY 脚本
 
-- 仓库根目录目前有两个 DIY 脚本：`diy-part1.sh`和`diy-part2.sh`，它们分别在更新与安装 feeds 的前后执行，你可以把对源码修改的指令写到脚本中，比如修改默认IP、主机名、主题、添加/删除软件包等操作。但不仅限于这些操作，发挥你强大的想象力，可做出更强大的功能。
-
-
-> **TIPS:** 脚本工作目录在源码目录，内附几个简单的例子供参考。
+- 仓库根目录目前有两个 DIY 脚本：`diy-part1.sh`和`diy-part2.sh`，它们分别在更新与安装 feeds 的前后执行，可以把对源码修改的指令写到脚本中，比如修改默认IP、主机名、主题、添加/删除软件包等操作。
 
 ### 添加额外的软件包
 
@@ -66,11 +58,11 @@ env:
 git clone https://github.com/P3TERX/xxx package/xxx
 ```
 
-+   本地`make menuconfig`生成`.config`文件时添加相应的软件包，如果你知道包名可以直接写到`.config`文件中。
++   本地`make menuconfig`生成`.config`文件时添加相应的软件包。
 
 > **TIPS:** 如果额外添加的软件包与 OpenWrt 源码中已有的软件包同名的情况，则需要把 OpenWrt 源码中的同名软件包删除，否则会优先编译 OpenWrt 中的软件包。这同样可以利用到的 DIY 脚本，相关指令应写在`diy-part2.sh`。
 
-- 原理是把软件包源码放到`package`目录下，编译时会自动遍历，与本地编译是一样的。当然方法不止一种，其它方式请自行探索。
+- 原理是把软件包源码放到`package`目录下，编译时会自动遍历，与本地编译是一样的。
 
 
 ### 自定义 feeds 配置文件
@@ -85,7 +77,7 @@ git clone https://github.com/P3TERX/xxx package/xxx
 
 ### 自定义源码
 
-- 默认引用的是 Lean 的源码，如果你有编译其它源码的需求可以进行替换。
+- 默认引用的是 Lean 的源码，编译其它源码的需求可以进行替换。
 
 - 编辑 workflow 文件（`.github/workflows/build-openwrt.yml`），修改下面的相关环境变量字段。
 
@@ -143,14 +135,12 @@ git clone https://github.com/P3TERX/xxx package/xxx
 UPLOAD_RELEASE: true
 ```
 
-- 编译完成后你可以在 releases 页面找到下载链接。
+- 编译完成后可以在 releases 页面找到下载链接。
 
 
 > **TIPS:** 为了不给 GitHub 服务器带来负担，默认保留 3 个历史记录。
 
 ### 定时自动编译
-
-> **TIPS:** 源码更新是不确定的，定时编译经常是在编译没有变动的源码，无意义且浪费资源，所以不建议使用。
 
 - 编辑 workflow 文件（`.github/workflows/build-openwrt.yml`）取消注释下面两行。
 
@@ -160,4 +150,5 @@ UPLOAD_RELEASE: true
 #    - cron: 0 8 * * 5
 ```
 
-- 例子是北京时间每周五下午4点（16时）开始编译（周末下班回家直接下载最新固件开始折腾）。如需自定义则按照 cron 格式修改即可，GitHub Actions 的时区为 UTC ，注意按照自己所在地时区进行转换。
+- 例子是北京时间每周五下午4点（16时）开始编译。如需自定义则按照 cron 格式修改即可。
+- GitHub Actions 的时区为 UTC ，注意按照所在地时区进行转换。
