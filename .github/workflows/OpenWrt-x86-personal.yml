@@ -80,6 +80,9 @@ jobs:
     - name: 更新外部插件
       run: cd openwrt && ./scripts/feeds update -a
 
+    - name: 删除冲突插件
+      run: cd openwrt && rm -rf feeds/others/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd*,miniupnpd-iptables,wireless-regdb}
+
     - name: 安装外部插件
       run: cd openwrt && ./scripts/feeds install -a
       
